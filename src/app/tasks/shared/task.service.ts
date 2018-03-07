@@ -15,12 +15,12 @@ const TASKS: Array<Task> = [
 @Injectable()
 
 export class TaskService{
-  getTasks(): Promise<Task[]> {
+  getTasks(): Promise<{Task: Task[]}> {
     let promise = new Promise(function(resolve, reject){
       if(TASKS.length > 0) {
-        resolve(TASKS);
-        // setTimeout(() => {
-        // }, 1000);
+        setTimeout(() => {
+          resolve(TASKS);
+        }, 1000);
       } else {
         let error = 'Não há tarefas';
         reject(error);

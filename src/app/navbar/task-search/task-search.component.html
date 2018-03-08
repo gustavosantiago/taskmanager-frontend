@@ -1,9 +1,11 @@
-<div>
-  <div class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Buscar tarefas" aria-label="Search">
+<div style="position: relative">
+  <div class="form-group">
+    <input #searchInput class="form-control mr-sm-2" type="search" placeholder="Buscar tarefas" aria-label="Search" (keyup)="search(searchInput.value)">
   </div>
 
-  <div class="list-group" style="position: absolute">
-    <a href="" class="list-group" style="position: absolute; width: 100%; left: 0; top: 35px; z-index: 1000;"></a>
+  <div *ngIf="tasks" class="list-group" style="position: absolute; width: 100%; left: 0; top: 35px; z-index: 1000;">
+    <a *ngFor="let task of tasks" (click)="goToTask(task)" class="list-group-item" style="cursor: pointer;">
+      {{task.title}}
+    </a>
   </div>
 </div>

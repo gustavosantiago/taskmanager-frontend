@@ -12,7 +12,7 @@ export class TasksComponent implements OnInit {
   public tasks: Array<Task>;
   public newTask: Task;
 
-  public constructor(private taskService: TaskService){ 
+  public constructor(private taskService: TaskService) {
     this.newTask = new Task(null, '');
   }
   
@@ -24,19 +24,19 @@ export class TasksComponent implements OnInit {
       )
   }
 
-  createTask(){
+  public createTask() {
     this.newTask.title = this.newTask.title.trim();
-    
-    if(!this.newTask.title) {
-      alert('Tarefa necessita de um título')
+
+    if (!this.newTask.title) {
+      alert("A tarefa deve ter um título");
     } else {
       this.taskService.create(this.newTask)
         .subscribe(
           (task) => {
-            this.tasks.push(task);
-            this.newTask = new Task(null, '')
+            this.tasks.unshift(task);
+            this.newTask = new Task(null, '');
           },
-          () => alert('Houve um erro')
+          () => alert("Ocorreu um no servidor, tente mais tarde.")
         )
     }
   }
@@ -50,5 +50,4 @@ export class TasksComponent implements OnInit {
         ) 
     }
   }
-
 }

@@ -23,11 +23,26 @@ export class TaskDetailComponent implements OnInit{
 
   ngOnInit(){
     this.route.params
-      .switchMap((params: Params) => this.taskService.getTask(+params['id']))
-      .subscribe(task => this.task = task)
+      .switchMap((params: Params) => this.taskService.getById(+params['id']))
+      .subscribe(
+        task => this.task = task,
+        error => alert('Ocorreu um erro')
+      )
   }
 
   goBack(){
     this.location.back();
+  }
+
+  updateTask(){
+    if(!this.task.title){
+      alert('Tarefa deve ter um titulo')
+    }else{
+      this.taskService.update(this.task)
+        .subscribe(
+          () => alert('Tarefa atualizada'),
+          error => alert('Ocorreu um erro')
+        )
+    }
   }
 }

@@ -18,7 +18,7 @@ export class TaskService{
   getAll(): Observable<Task[]> {
     return this.http.get(this.tasksUrl)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json().data as Task[]);
+      .map((response: Response) => response.json() as Task[]);
   }
 
   // Important Tasks
@@ -34,7 +34,7 @@ export class TaskService{
 
     return this.http.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json().data as Task);
+      .map((response: Response) => response.json() as Task);
 
   }
 
@@ -47,7 +47,7 @@ export class TaskService{
 
     return this.http.post(this.tasksUrl, body, { headers: headers })
       .catch(this.handleErrors)
-      .map((response) => response.json().data as Task)
+      .map((response) => response.json() as Task)
   }
   
   // Update 
@@ -73,6 +73,14 @@ export class TaskService{
     return this.http.delete(url, {headers: headers})
       .catch(this.handleErrors)
       .map(() => null)
+  }
+
+  searchByTitle(term: string): Observable<Task[]> {
+    let url = `${this.tasksUrl}?title=${term}`;
+
+    return this.http.get(url)
+      .catch(this.handleErrors)
+      .map((response: Response) => response.json())
   }
 
   private handleErrors(errors: Response) {

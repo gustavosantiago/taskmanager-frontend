@@ -30,7 +30,7 @@
         <a [routerLink]="['/tasks', task.id]" class="btn btn-info">
           <i class="fas fa-info-circle"></i> Detalhes
         </a>
-        <button class="btn btn-danger" (click)="deleteTask()">
+        <button class="btn btn-danger" (click)="deleteTask(task)">
           <i class="fas fa-trash"></i> Excluir
         </button>
       </td>

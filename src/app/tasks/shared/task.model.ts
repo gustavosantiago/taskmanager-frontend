@@ -1,9 +1,14 @@
-export class Task{
+export class Task {
   public id: number;
   public title: string;
+  public deadline: string;
 
-  constructor(id: number, title: string){
-    this.id    = id;
-    this.title = title;
-  }
+  constructor(
+    id: number,
+    title: string,
+    deadline: string,
+    description?: string,
+    done?: boolean
+  ) 
+  {}
 }

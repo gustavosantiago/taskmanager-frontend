@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
-import 'rxjs/add/operator/switchMap';
-
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
 
@@ -14,6 +12,10 @@ import { TaskService } from '../shared/task.service';
 
 export class TaskDetailComponent implements OnInit{
   task: Task;
+  taskDoneOptions: Array<any> = [
+    { value: false, text: 'Pendente' },
+    { value: true, text: 'Concluído' }
+  ];
 
   constructor(
     private taskService: TaskService,

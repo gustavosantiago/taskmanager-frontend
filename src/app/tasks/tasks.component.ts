@@ -13,7 +13,7 @@ export class TasksComponent implements OnInit {
   public newTask: Task;
 
   public constructor(private taskService: TaskService) {
-    this.newTask = new Task(null, '');
+    // this.newTask = new Task(null, '');
   }
   
   ngOnInit(){
@@ -34,7 +34,7 @@ export class TasksComponent implements OnInit {
         .subscribe(
           (task) => {
             this.tasks.unshift(task);
-            this.newTask = new Task(null, '');
+            // this.newTask = new Task(null, '');
           },
           () => alert("Ocorreu um no servidor, tente mais tarde.")
         )

@@ -19,8 +19,8 @@ import { TaskService } from './tasks/shared/task.service';
 import { AppRoutingModule } from './app-routing.module';
 
 // in memory web api
-import { InMemoryWebApiModule } from "angular-in-memory-web-api";
-import { InMemoryTaskDataService } from "./in-memory-task-data.service";
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryTaskDataService } from './in-memory-task-data.service';
 
 // rxjs oprators
 import 'rxjs/add/operator/do';
@@ -34,9 +34,12 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 
+// jquery plugins
+import * as $ from 'jquery';
+
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     DashboardComponent,
     NavbarComponent,
     TasksComponent,

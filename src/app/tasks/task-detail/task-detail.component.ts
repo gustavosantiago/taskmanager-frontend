@@ -5,6 +5,9 @@ import { Location } from '@angular/common';
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
 
+import * as $ from 'jquery';
+import 'jquery-ui';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'task-detail',
@@ -34,6 +37,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // $('#deadline').datepicker();
   }
 
   goBack() {

@@ -25,11 +25,11 @@ export class TaskSearchComponent {
     .do(term => console.log(term))
     .switchMap(
       term => term ? this.taskService.searchByTitle(term) : Observable.of<Task[]>([])
-    ).subscribe(tasks => this.tasks = tasks)
+    ).subscribe(tasks => this.tasks = tasks);
   }
 
   search(term: string){
-    this.searchTerms.next(term);  
+    this.searchTerms.next(term);
   }
 
   goToTask(task: Task){

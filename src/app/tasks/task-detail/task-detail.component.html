@@ -1,4 +1,4 @@
-<h1 class="page-header">Detalhes da tarefa: {{ task.title }}</h1>
+<h1 class="page-header">Detalhes da tarefa: {{ task?.title }}</h1>
 
 <form #taskForm="ngForm" *ngIf="task">
   <div class="row">
@@ -15,7 +15,7 @@
 
     <div class="form-group col-md-3">
       <label for="deadline" class="control-label">Prazo de entrega</label>
-      <input #deadline="ngModel" [(ngModel)]="task.deadline" type="text" class="form-control" [class.is-valid]="deadline.valid" [class.is-invalid]="deadline.invalid && deadline.touched" name="deadline" id="deadline" required>
+        <input #deadline="ngModel" [(ngModel)]="task.deadline" type="text" class="form-control" [class.is-valid]="deadline.valid" [class.is-invalid]="deadline.invalid && deadline.touched" name="deadline" id="deadline" required>
       <div class="invalid-feedback">Prazo Inválido.</div>
     </div>
 

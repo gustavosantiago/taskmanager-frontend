@@ -47,10 +47,10 @@ import * as $ from 'jquery';
     TaskSearchComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule,
     InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
   ],
   providers: [

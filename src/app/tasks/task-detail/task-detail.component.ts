@@ -37,7 +37,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // $('#deadline').datepicker();
+    this.task.deadline = String($('#deadline').val());
   }
 
   goBack() {
@@ -45,14 +45,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   updateTask() {
-    if (!this.task.title) {
-      alert('Tarefa deve ter um titulo');
-    } else {
-      this.taskService.update(this.task)
-        .subscribe(
-          () => alert('Tarefa atualizada'),
-          error => alert('Ocorreu um erro')
-        );
-    }
+    this.taskService.update(this.task)
+      .subscribe(
+        () => alert('Tarefa atualizada'),
+        error => alert('Ocorreu um erro')
+      );
   }
 }

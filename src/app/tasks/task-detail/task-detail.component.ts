@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
@@ -15,6 +16,7 @@ import 'jquery-ui';
 })
 
 export class TaskDetailComponent implements OnInit, AfterViewInit {
+  reactiveTaskForm: FormGroup;
   task: Task;
   taskDoneOptions: Array<any> = [
     { value: false, text: 'Pendente' },
@@ -25,7 +27,14 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private location: Location
-  ) { }
+  ) {
+    this.reactiveTaskForm = new FormGroup({
+      title: new FormControl(''),
+      deadline: new FormControl(''),
+      description: new FormControl(''),
+      done: new FormControl('')
+    });
+   }
 
   ngOnInit() {
     this.route.params

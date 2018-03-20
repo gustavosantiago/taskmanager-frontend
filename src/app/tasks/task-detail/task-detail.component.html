@@ -1,6 +1,33 @@
 <h1 class="page-header">Detalhes da tarefa: {{ task?.title }}</h1>
 
-<form #taskForm="ngForm" *ngIf="task" (ngSubmit)="updateTask()">
+<form>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label for="title" class="control-label">Título</label>
+      <input type="text" formControlName="title" id="title" class"form-control">
+    </div>
+   
+    <div class="form-group col-md-3">
+      <label for="deadline" class="control-label">Prazo de Entrega</label>
+      <input type="date" formControlName="deadline" class "form-control">
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="done" class="control-label">Situação</label>
+      <input type="text" formControlName="done" class "form-control">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group com-md-12">
+      <label for="description" class="control-label">Descrição</label>
+      <textarea type="text" formControlName="description" class="form-control" name="description" rows="4" id="description"></textarea>
+    </div>
+  </div>
+    
+</form>
+
+<!-- <form #taskForm="ngForm" *ngIf="task" (ngSubmit)="updateTask()">
   <div class="row">
     <div class="form-group col-md-6">
       <label for="title" class="control-label">Título</label>
@@ -38,4 +65,4 @@
 
   <button [disabled]="taskForm.invalid" type="submit" class="btn btn-success">Atualizar</button>
   <button class="btn btn-defaut" (click)="goBack()">Voltar</button>
-</form>
+</form> -->

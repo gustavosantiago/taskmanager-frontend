@@ -7,7 +7,6 @@ import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
 
 import * as $ from 'jquery';
-import 'jquery-ui';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -29,10 +28,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     private location: Location
   ) {
     this.reactiveTaskForm = new FormGroup({
-      title: new FormControl(''),
-      deadline: new FormControl(''),
-      description: new FormControl(''),
-      done: new FormControl('')
+      title: new FormControl(null),
+      deadline: new FormControl(null),
+      description: new FormControl(null),
+      done: new FormControl(null)
     });
    }
 
@@ -40,9 +39,22 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     this.route.params
       .switchMap((params: Params) => this.taskService.getById(+params['id']))
       .subscribe(
-        task => this.task = task,
+        task => this.setTask(task),
         error => alert('Ocorreu um erro')
       );
+  }
+
+  setTask(task: Task) {
+    this.task = task;
+
+    let formModel = {
+      title: task.title || null,
+      description: task.description || null,
+      done: task.done || null,
+      deadline: task.deadline || null
+    }
+
+    this.reactiveTaskForm.setValue(formModel);
   }
 
   ngAfterViewInit() {

@@ -1,30 +1,33 @@
 <h1 class="page-header">Detalhes da tarefa: {{ task?.title }}</h1>
 
-<form>
+<form [formGroup]="reactiveTaskForm">
   <div class="row">
     <div class="form-group col-md-6">
       <label for="title" class="control-label">Título</label>
-      <input type="text" formControlName="title" id="title" class"form-control">
-    </div>
-   
-    <div class="form-group col-md-3">
-      <label for="deadline" class="control-label">Prazo de Entrega</label>
-      <input type="date" formControlName="deadline" class "form-control">
+      <input type="text" class="form-control" id="title" formControlName="title">      
     </div>
 
     <div class="form-group col-md-3">
-      <label for="done" class="control-label">Situação</label>
-      <input type="text" formControlName="done" class "form-control">
+      <label for="deadline" class="control-label">Prazo de entrega</label>
+      <input type="date" class="form-control" id="deadline" formControlName="deadline">
+      <div class="invalid-feedback">Prazo Inválido.</div>
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="done" class="control-label">Status</label>
+      <select class="form-control" id="done" formControlName="done">
+        <option value=""></option>
+        <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{option.text}}</option>
+      </select>
     </div>
   </div>
-
+  
   <div class="row">
-    <div class="form-group com-md-12">
+    <div class="form-group col-md-12">
       <label for="description" class="control-label">Descrição</label>
-      <textarea type="text" formControlName="description" class="form-control" name="description" rows="4" id="description"></textarea>
+      <textarea class="form-control" id="description" formControlName="description" rows="4"></textarea>
     </div>
   </div>
-    
 </form>
 
 <!-- <form #taskForm="ngForm" *ngIf="task" (ngSubmit)="updateTask()">

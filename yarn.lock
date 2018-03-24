@@ -200,15 +200,9 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/jquery@*", "@types/jquery@^3.3.1":
+"@types/jquery@^3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.1.tgz#55758d44d422756d6329cbf54e6d41931d7ba28f"
-
-"@types/jqueryui@^1.12.2":
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/@types/jqueryui/-/jqueryui-1.12.2.tgz#8daa7ffa16880c78b1662ff287df058a2aceb651"
-  dependencies:
-    "@types/jquery" "*"
 
 "@types/node@^6.0.46", "@types/node@~6.0.60":
   version "6.0.101"
@@ -342,13 +336,9 @@ amqplib@^0.5.2:
     readable-stream "1.x >=1.1.9"
     safe-buffer "^5.0.1"
 
-angular-in-memory-web-api@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.5.3.tgz#49ba7b7d19210e14b0dbe62d2e3b63d4b4a29c4a"
-
-angular4-datepicker@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/angular4-datepicker/-/angular4-datepicker-1.0.1.tgz#d017407f979c0bdfed6b863a4107c6c1969b3c75"
+angular-in-memory-web-api@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.6.0.tgz#28262d6f7cdf1415c1d540c1a5cb838d58cb602a"
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -3572,10 +3562,6 @@ jasmine@^2.5.3:
 jasminewd2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
-
-jquery-ui@^1.12.1:
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
 
 jquery@^3.3.1:
   version "3.3.1"

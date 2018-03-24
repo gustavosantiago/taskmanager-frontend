@@ -47,18 +47,21 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   setTask(task: Task) {
     this.task = task;
 
-    let formModel = {
+    const formModel = {
       title: task.title || null,
       description: task.description || null,
       done: task.done || null,
       deadline: task.deadline || null
-    }
+    };
 
     this.reactiveTaskForm.setValue(formModel);
   }
 
   ngAfterViewInit() {
-    this.task.deadline = String($('#deadline').val());
+    // this.task.deadline = String($('#deadline').val());
+    this.reactiveTaskForm.get('deadline').setValue(
+      String($('#deadline').val()
+    ));
   }
 
   goBack() {

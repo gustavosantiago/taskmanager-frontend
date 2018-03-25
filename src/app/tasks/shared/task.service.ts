@@ -8,12 +8,13 @@ import { Task } from './task.model';
 
 @Injectable()
 
-export class TaskService{
+export class TaskService {
   public tasksUrl = 'api/tasks';
-  constructor(private http: Http){}
+  constructor(private http: Http) {}
 
   // Index
   getAll(): Observable<Task[]> {
+    console.log(this.http.get(this.tasksUrl));
     return this.http.get(this.tasksUrl)
       .catch(this.handleErrors)
       .map((response: Response) => response.json() as Task[]);
@@ -28,7 +29,7 @@ export class TaskService{
 
   // Show
   getById(id: number): Observable<Task> {
-    let url = `${this.tasksUrl}/${id}`;
+    const url = `${this.tasksUrl}/${id}`;
 
     return this.http.get(url)
       .catch(this.handleErrors)
@@ -38,47 +39,47 @@ export class TaskService{
 
   // Create
   create(task: Task): Observable<Task> {
-    let body = JSON.stringify(task);
-    let headers = new Headers({
+    const body = JSON.stringify(task);
+    const headers = new Headers({
       'Content-type': 'application/json'
     });
 
     return this.http.post(this.tasksUrl, body, { headers: headers })
       .catch(this.handleErrors)
-      .map((response) => response.json() as Task)
+      .map((response) => response.json() as Task);
   }
-  
-  // Update 
+
+  // Update
   update(task: Task): Observable<Task> {
-    let url  = `${this.tasksUrl}/${task.id}`;
-    let body = JSON.stringify(task)
-    let headers = new Headers({
+    const url  = `${this.tasksUrl}/${task.id}`;
+    const body = JSON.stringify(task);
+    const headers = new Headers({
       'Content-type': 'application/json'
     });
 
     return this.http.put(url, body, {headers: headers})
       .catch(this.handleErrors)
-      .map(() => task)
+      .map(() => task);
   }
 
   // Delete/Destroy
   delete(id: number): Observable<null> {
-    let url     = `${this.tasksUrl}/${id}`;
-    let headers = new Headers({
+    const url     = `${this.tasksUrl}/${id}`;
+    const headers = new Headers({
       'Content-type': 'application/json'
     });
 
     return this.http.delete(url, {headers: headers})
       .catch(this.handleErrors)
-      .map(() => null)
+      .map(() => null);
   }
 
   searchByTitle(term: string): Observable<Task[]> {
-    let url = `${this.tasksUrl}?title=${term}`;
+    const url = `${this.tasksUrl}?title=${term}`;
 
     return this.http.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json())
+      .map((response: Response) => response.json());
   }
 
   private handleErrors(errors: Response) {

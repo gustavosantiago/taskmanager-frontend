@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Task } from '../shared/task.model';
 import { TaskService } from '../shared/task.service';
@@ -15,12 +15,9 @@ import * as $ from 'jquery';
 })
 
 export class TaskDetailComponent implements OnInit, AfterViewInit {
+  taskDoneOptions: Array<any>;
   reactiveTaskForm: FormGroup;
   task: Task;
-  taskDoneOptions: Array<any> = [
-    { value: false, text: 'Pendente' },
-    { value: true, text: 'Concluído' }
-  ];
 
   constructor(
     private taskService: TaskService,
@@ -28,52 +25,73 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     private location: Location,
     private formBuilder: FormBuilder
   ) {
+    // tslint:disable-next-line:no-unused-expression
+    this.taskDoneOptions = [
+      { value: false, text: 'Pendente' },
+      { value: true, text: 'Concluído' }
+    ];
+
     this.reactiveTaskForm = this.formBuilder.group({
-      title: [null],
-      deadline: [null],
-      description: [null],
-      done: [null]
+      title: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
+      deadline: [null, Validators.required],
+      description: [null, Validators.required],
+      done: [null, Validators.required]
     });
    }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.task = new Task(null, null, null, null);
+
     this.route.params
       .switchMap((params: Params) => this.taskService.getById(+params['id']))
       .subscribe(
         task => this.setTask(task),
-        error => alert('Ocorreu um erro')
+        error => alert('Não inciou')
       );
   }
 
-  setTask(task: Task) {
+  public setTask(task: Task): void {
     this.task = task;
-
-    const formModel = {
-      title: task.title || null,
-      description: task.description || null,
-      done: task.done || null,
-      deadline: task.deadline || null
-    };
-
-    this.reactiveTaskForm.setValue(formModel);
+    this.reactiveTaskForm.patchValue(task);
   }
 
-  ngAfterViewInit() {
-    // this.task.deadline = String($('#deadline').val());
+  public ngAfterViewInit() {
     this.reactiveTaskForm.get('deadline').setValue(
       String($('#deadline').val()
     ));
   }
 
-  goBack() {
+  public goBack() {
     this.location.back();
   }
 
-  updateTask() {
+  public updateTask() {
+    this.task.title = String(this.reactiveTaskForm.get('title'));
+    this.task.description = String(this.reactiveTaskForm.get('description'));
+    this.task.deadline = String(this.reactiveTaskForm.get('deadline'));
+    this.task.done = Boolean(this.reactiveTaskForm.get('done'));
+
     this.taskService.update(this.task)
       .subscribe(
         () => alert('Tarefa atualizada'),
-        error => alert('Ocorreu um erro')
+        error => alert('Não atualizou')
       );
+  }
+
+  // form errors methods
+  public fieldClassForErrorOrSuccess(fieldName: string) {
+    return {
+      'is-invalid': this.showFieldError(fieldName),
+      'is-valid': this.getField('title').valid
+    };
+  }
+
+  public showFieldError(fieldName: string): boolean {
+    const field = this.getField(fieldName);
+    return field.invalid && (field.touched || field.dirty);
+  }
+
+  public getField(fieldName) {
+    return this.reactiveTaskForm.get(fieldName);
   }
 }

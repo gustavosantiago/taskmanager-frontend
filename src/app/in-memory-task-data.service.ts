@@ -8,7 +8,7 @@ export class InMemoryTaskDataService implements InMemoryDbService {
 
   public createDb() {
     const tasks = [
-      { id: 1, title: 'Comprar um celular novo' },
+      { id: 1, title: 'Comprar um celular novo', description: '', done: false, deadline: '' },
       { id: 2, title: 'Pagar boleto' },
       { id: 3, title: 'Pagar Internet' },
       { id: 4, title: 'Assistir aula sobre Rails' },

@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
     this.taskService.getAll()
       .subscribe(
       tasks => this.tasks = tasks.sort((a, b) => b.id - a.id),
-        error => alert('Ocorreu um erro')
+        error => alert('Não carregou as tarefas')
       );
   }
 
@@ -46,7 +46,7 @@ export class TasksComponent implements OnInit {
       this.taskService.delete(task.id)
         .subscribe(
           () => this.tasks = this.tasks.filter(t => t !== task),
-          () => alert('Ocorreu um erro')
+          () => alert('Não deletou')
         );
     }
   }

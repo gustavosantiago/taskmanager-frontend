@@ -12,6 +12,9 @@ import { TaskSearchComponent } from './navbar/task-search/task-search.component'
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 
+// sign up components
+import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
+
 // services imports
 import { TaskService } from './tasks/shared/task.service';
 
@@ -42,9 +45,10 @@ import * as $ from 'jquery';
     AppComponent,
     DashboardComponent,
     NavbarComponent,
-    TasksComponent,
+    SignUpFormComponent,
     TaskDetailComponent,
-    TaskSearchComponent
+    TaskSearchComponent,
+    TasksComponent
   ],
   imports: [
     AppRoutingModule,

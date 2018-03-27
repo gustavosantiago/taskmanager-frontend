@@ -13,6 +13,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 
 // sign up components
+import { SignInFormComponent } from './sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
 // services imports
@@ -45,6 +46,7 @@ import * as $ from 'jquery';
     AppComponent,
     DashboardComponent,
     NavbarComponent,
+    SignInFormComponent,
     SignUpFormComponent,
     TaskDetailComponent,
     TaskSearchComponent,

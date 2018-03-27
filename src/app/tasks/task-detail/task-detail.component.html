@@ -7,7 +7,7 @@
     <div class="form-group col-md-6">
       <label for="title" class="control-label">Título</label>
       <input type="text" class="form-control" id="title" formControlName="title" [ngClass]="formUtils.fieldClassForErrorOrSuccess('title')">
-      
+
       <div *ngIf="formUtils.showFieldError(getField('title'))" class="invalid-feedback">
         <div *ngIf="form.get('title').errors.required">Título Obrigatório</div>
         <div *ngIf="form.get('title').errors.minlength">Título deve ter min 3 caracteres</div>
@@ -31,7 +31,7 @@
       </select>
     </div>
   </div>
-  
+
   <!-- description -->
   <div class="row">
     <div class="form-group col-md-12">

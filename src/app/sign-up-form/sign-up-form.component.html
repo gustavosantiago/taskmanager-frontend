@@ -1,0 +1,57 @@
+<h1 class="page-header">Cadastre-se</h1>
+
+<div class="jumbotron">
+
+  <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signUpUser()">
+    <div class="row">
+      <!-- name -->
+      <div class="form-group col-md-6">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Name" formControlName="name" [ngClass]="formUtils.fieldClassForErrorOrSuccess('name')">
+      
+        <div *ngIf="formUtils.showFieldError('name')" class="invalid-feedback">
+          <div *ngIf="form.get('name').errors.required">Nome Obrigatório</div>
+          <div *ngIf="form.get('name').errors.minlength">Nome deve ter min 7 caracteres</div>
+          <div *ngIf="form.get('name').errors.maxlength">Nome deve ter max 100 caracteres</div>
+        </div>
+      </div>
+      
+      <!-- e-mail -->
+      <div class="form-group col-md-6">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email" [ngClass]="formUtils.fieldClassForErrorOrSuccess('email')">
+
+        <div *ngIf="formUtils.showFieldError('email')" class="invalid-feedback">
+          <div *ngIf="form.get('email').errors.required">E-mail Obrigatório</div>
+          <div *ngIf="form.get('email').errors.email">E-mail inválido</div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <!-- password -->
+      <div class="form-group col-md-6">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password" formControlName="password" [ngClass]="formUtils.fieldClassForErrorOrSuccess('password')">
+      
+        <div *ngIf="formUtils.showFieldError('password')" class="invalid-feedback">
+          <div *ngIf="form.get('password').errors.required">Password Obrigatório</div>
+          <div *ngIf="form.get('password').errors.minlength">Password deve ter min 9 caracteres</div>
+        </div>
+      </div>
+      
+      <!-- passwordConfirmation -->
+      <div class="form-group col-md-6">
+        <label for="passwordConfirmation">Password Confirmation</label>
+        <input type="password" class="form-control" id="passwordConfirmation" placeholder="Enter Password Again" formControlName="passwordConfirmation" [ngClass]="formUtils.fieldClassForErrorOrSuccess('passwordConfirmation')">
+        
+        <div *ngIf="formUtils.showFieldError('passwordConfirmation')" class="invalid-feedback">
+          <div *ngIf="form.get('passwordConfirmation').errors.required">Password Confirmation Obrigatório</div>
+          <div *ngIf="form.get('passwordConfirmation').errors.mismatch">Password Confirmation Diferente</div>
+        </div>
+      </div>
+    </div>
+   
+    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Cadastrar</button>
+  </form>
+</div>

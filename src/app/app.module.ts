@@ -20,7 +20,7 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
 // services imports
 import { TaskService } from './tasks/shared/task.service';
-
+import { AuthService } from './shared/auth.service';
 // modules imports
 import { AppRoutingModule } from './app-routing.module';
 
@@ -64,6 +64,7 @@ import * as $ from 'jquery';
   ],
   providers: [
     Angular2TokenService,
+    AuthService,
     TaskService
   ],
   bootstrap: [AppComponent]

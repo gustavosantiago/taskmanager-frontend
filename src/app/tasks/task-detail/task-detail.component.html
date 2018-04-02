@@ -19,7 +19,7 @@
     <div class="form-group col-md-3">
       <label for="deadline" class="control-label">Prazo de entrega</label>
       <input type="date" class="form-control" id="deadline" formControlName="deadline" [ngClass]="formUtils.fieldClassForErrorOrSuccess('deadline')">
-      <div ngIf="formUtils.showFieldError(getField('deadline'))" class="invalid-feedback">Prazo Inválido.</div>
+      <div *ngIf="formUtils.showFieldError(getField('deadline'))" class="invalid-feedback">Prazo Inválido.</div>
     </div>
 
     <!-- status -->
@@ -30,8 +30,9 @@
         <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{option.text}}</option>
       </select>
     </div>
+    
   </div>
-
+  
   <!-- description -->
   <div class="row">
     <div class="form-group col-md-12">

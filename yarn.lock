@@ -340,6 +340,10 @@ angular-in-memory-web-api@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.6.0.tgz#28262d6f7cdf1415c1d540c1a5cb838d58cb602a"
 
+angular2-token@^0.2.0-beta.14:
+  version "0.2.0-beta.14"
+  resolved "https://registry.yarnpkg.com/angular2-token/-/angular2-token-0.2.0-beta.14.tgz#ed23b461f698b5e24cf472946ba1032f631c3cc4"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"

@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { Angular2TokenService } from 'angular2-token';
+
 // app components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -61,6 +63,7 @@ import * as $ from 'jquery';
     ReactiveFormsModule
   ],
   providers: [
+    Angular2TokenService,
     TaskService
   ],
   bootstrap: [AppComponent]

@@ -1,0 +1,30 @@
+<h1 class="page-header">Logar</h1>
+
+<div class="jumbotron">
+
+  <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signInUser()">
+    <div class="row">
+      <!-- e-mail -->
+      <div class="form-group col-md-6">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email" [ngClass]="formUtils.fieldClassForErrorOrSuccess('email')">
+
+        <div *ngIf="formUtils.showFieldError('email')" class="invalid-feedback">
+          <div *ngIf="form.get('email').errors.required">E-mail Obrigatório</div>
+          <div *ngIf="form.get('email').errors.email">E-mail inválido</div>
+        </div>
+      </div>
+      
+      <div class="form-group col-md-6">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password" formControlName="password" [ngClass]="formUtils.fieldClassForErrorOrSuccess('password')">
+  
+        <div *ngIf="formUtils.showFieldError('password')" class="invalid-feedback">
+          <div *ngIf="form.get('password').errors.required">Password Obrigatório</div>
+        </div>
+      </div>
+    </div>
+
+    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>

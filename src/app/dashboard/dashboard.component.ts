@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     this.taskService.getImportant()
       .subscribe(
         tasks => this.tasks = tasks,
-        error => alert('Não iniciou o dashboard')
+        error => console.log(error)
       );
 
   }

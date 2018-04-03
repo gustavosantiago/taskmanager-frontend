@@ -9,7 +9,7 @@ import { Task } from './task.model';
 @Injectable()
 
 export class TaskService {
-  public tasksUrl = 'api/tasks';
+  public tasksUrl = 'http://127.0.0.1:3000/tasks';
   constructor(private http: Http) {}
 
   // Index

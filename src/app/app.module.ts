@@ -21,12 +21,12 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 // services imports
 import { TaskService } from './tasks/shared/task.service';
 import { AuthService } from './shared/auth.service';
+
+// guards
+import { AuthGuard } from './guards/auth.guard';
+
 // modules imports
 import { AppRoutingModule } from './app-routing.module';
-
-// in memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryTaskDataService } from './in-memory-task-data.service';
 
 // rxjs oprators
 import 'rxjs/add/operator/do';
@@ -59,11 +59,11 @@ import * as $ from 'jquery';
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryTaskDataService),
     ReactiveFormsModule
   ],
   providers: [
     Angular2TokenService,
+    AuthGuard,
     AuthService,
     TaskService
   ],

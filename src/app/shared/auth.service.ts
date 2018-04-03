@@ -18,9 +18,12 @@ export class AuthService {
 
   public signIn(uid: string, password: string) {}
 
-  public signOut() {}
+  public signOut(): Observable<Response> {
+    return this.tokenService.signOut()
+      .catch(this.handleErrors)
+  }
 
-  public userSignedIn() {
+  public userSignedIn(): boolean{
     return this.tokenService.userSignedIn();
   }
 

@@ -1,7 +1,7 @@
-<div style="position: relative">
-  <div class="form-group">
+<div>
+  <form class="form-inline">
     <input #searchInput class="form-control mr-sm-2" type="search" placeholder="Buscar tarefas" aria-label="Search" (keyup)="search(searchInput.value)">
-  </div>
+  </form>
 
   <div *ngIf="tasks" class="list-group" style="position: absolute; width: 100%; left: 0; top: 35px; z-index: 1000;">
     <a *ngFor="let task of tasks" (click)="goToTask(task)" class="list-group-item" style="cursor: pointer;">

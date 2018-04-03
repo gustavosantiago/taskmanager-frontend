@@ -24,6 +24,7 @@ import { AuthService } from './shared/auth.service';
 
 // guards
 import { AuthGuard } from './guards/auth.guard';
+import { NotAuthenticatedGuard } from './guards/not-authenticated.guard';
 
 // modules imports
 import { AppRoutingModule } from './app-routing.module';
@@ -65,6 +66,7 @@ import * as $ from 'jquery';
     Angular2TokenService,
     AuthGuard,
     AuthService,
+    NotAuthenticatedGuard,
     TaskService
   ],
   bootstrap: [AppComponent]

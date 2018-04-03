@@ -13,7 +13,13 @@ export class AppComponent {
 
   public constructor(private tokenService: Angular2TokenService) {
     this.tokenService.init({
-      apiBase: 'http://127.0.0.1:3000'
+      apiBase: 'http://127.0.0.1:3000',
+      globalOptions: {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.taskmanager.v2'
+        }
+      }
     })
   }
 }

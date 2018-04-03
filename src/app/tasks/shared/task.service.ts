@@ -1,88 +1,114 @@
-import { Headers, Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
-
+import { Angular2TokenService } from 'angular2-token';
 import { Task } from './task.model';
 
 @Injectable()
 
 export class TaskService {
-  public tasksUrl = 'http://127.0.0.1:3000/tasks';
-  constructor(private http: Http) {}
+  public tasksUrl = 'tasks';
+  
+  constructor(private tokenHttp: Angular2TokenService) {}
 
   // Index
-  getAll(): Observable<Task[]> {
-    console.log(this.http.get(this.tasksUrl));
-    return this.http.get(this.tasksUrl)
+  public getAll(): Observable<Task[]> {
+    let url = `${this.tasksUrl}?q[s]=updated_at+DESC` 
+    
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json() as Task[]);
+      .map((response: Response) => this.responseToTasks(response))
   }
 
   // Important Tasks
-  getImportant(): Observable<Task[]> {
-    return this.getAll()
+  public getImportant(): Observable<Task[]> {
+    let url = `${this.tasksUrl}?q[s]=deadline+ASC`
+
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map(tasks => tasks.slice(0, 3));
+      .map((response: Response) => this.responseToTasks(response));
   }
 
   // Show
-  getById(id: number): Observable<Task> {
-    const url = `${this.tasksUrl}/${id}`;
+  public getById(id: number): Observable<Task> {
+    let url = `${this.tasksUrl}/${id}`;
 
-    return this.http.get(url)
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json() as Task);
-
+      .map((response: Response) => this.responseToTask(response));
   }
 
   // Create
-  create(task: Task): Observable<Task> {
-    const body = JSON.stringify(task);
-    const headers = new Headers({
-      'Content-type': 'application/json'
-    });
+  public create(task: Task): Observable<Task> {
+    let body = JSON.stringify(task);
 
-    return this.http.post(this.tasksUrl, body, { headers: headers })
+    return this.tokenHttp.post(this.tasksUrl, body)
       .catch(this.handleErrors)
-      .map((response) => response.json() as Task);
+      .map((response: Response) => this.responseToTask(response));
   }
 
   // Update
-  update(task: Task): Observable<Task> {
-    const url  = `${this.tasksUrl}/${task.id}`;
-    const body = JSON.stringify(task);
-    const headers = new Headers({
-      'Content-type': 'application/json'
-    });
+  public update(task: Task): Observable<Task> {
+    let url  = `${this.tasksUrl}/${task.id}`;
+    let body = JSON.stringify(task);
 
-    return this.http.put(url, body, {headers: headers})
+    return this.tokenHttp.put(url, body)
       .catch(this.handleErrors)
       .map(() => task);
   }
 
   // Delete/Destroy
-  delete(id: number): Observable<null> {
-    const url     = `${this.tasksUrl}/${id}`;
-    const headers = new Headers({
-      'Content-type': 'application/json'
-    });
+  public delete(id: number): Observable<null> {
+    let url     = `${this.tasksUrl}/${id}`;
 
-    return this.http.delete(url, {headers: headers})
+    return this.tokenHttp.delete(url)
       .catch(this.handleErrors)
       .map(() => null);
   }
 
-  searchByTitle(term: string): Observable<Task[]> {
-    const url = `${this.tasksUrl}?title=${term}`;
+  public searchByTitle(term: string): Observable<Task[]> {
+    let url = `${this.tasksUrl}?q[title_cont]=${term}`;
 
-    return this.http.get(url)
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json());
+      .map((response: Response) => this.responseToTasks(response));
   }
 
+  // PRIVATE METHODS
   private handleErrors(errors: Response) {
     return Observable.throw(errors);
+  }
+
+  private responseToTasks(response: Response): Task[] {
+    let collection = response.json().data as Array<any>;
+    let tasks: Task[] = [];
+
+    collection.forEach(item => {
+      let task         = {
+        id:          item.id,
+        title:       item.attributes.title,
+        deadline:    item.attributes.deadline,
+        description: item.attributes.description,
+        done:        item.attributes.done
+      }
+
+      tasks.push(task);
+    });
+
+    return tasks;
+  }
+
+  private responseToTask(response: Response): Task {
+    let task = {
+      id:          response.json().data.id,
+      title:       response.json().data.attributes.title,
+      deadline:    response.json().data.attributes.deadline,
+      description: response.json().data.attributes.description,
+      done:        response.json().data.attributes.done
+    }
+     
+    return task;
   }
 }

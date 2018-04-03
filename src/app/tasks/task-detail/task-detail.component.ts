@@ -34,10 +34,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     ];
 
     this.form = this.formBuilder.group({
-      title: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
-      deadline: [null, Validators.required],
-      description: [null, Validators.required],
-      done: [null, Validators.required]
+      title: new FormControl([null, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]]),
+      deadline: new FormControl([null, Validators.required]),
+      description: new FormControl([null, Validators.required]),
+      done: new FormControl([null, Validators.required])
     });
 
     this.formUtils = new FormUtils(this.form);
@@ -63,6 +63,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     this.form.get('deadline').setValue(
       String($('#deadline').val()
     ));
+
   }
 
   public goBack() {
@@ -70,15 +71,15 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   public updateTask() {
-    this.task.title = String(this.form.get('title'));
-    this.task.description = String(this.form.get('description'));
-    this.task.deadline = String(this.form.get('deadline'));
-    this.task.done = Boolean(this.form.get('done'));
+    this.task.title = this.form.get('title').value;
+    this.task.deadline = this.form.get('deadline').value;
+    this.task.done = this.form.get('done').value;
+    this.task.description = this.form.get('description').value;
 
     this.taskService.update(this.task)
       .subscribe(
-        () => alert('Tarefa atualizada'),
-        error => alert('Não atualizou')
-      );
+        () => alert("Tarefa atualizada com sucesso!"),
+        () => alert("Ocorreu um no servidor, tente mais tarde.")
+      )
   }
 }

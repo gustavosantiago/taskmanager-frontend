@@ -16,7 +16,7 @@ export class FormUtils {
     return field.invalid && (field.touched || field.dirty);
   }
 
-  public getField(fieldName) {
+  public getField(fieldName: string) {
     return this.form.get(fieldName);
   }
 }

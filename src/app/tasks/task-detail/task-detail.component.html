@@ -2,13 +2,12 @@
 
 <form [formGroup]="form" (ngSubmit)="updateTask()">
   <div class="row">
-
     <!-- title -->
     <div class="form-group col-md-6">
       <label for="title" class="control-label">Título</label>
       <input type="text" class="form-control" id="title" formControlName="title" [ngClass]="formUtils.fieldClassForErrorOrSuccess('title')">
-
-      <div *ngIf="formUtils.showFieldError(getField('title'))" class="invalid-feedback">
+    
+      <div *ngIf="formUtils.showFieldError('title')" class="invalid-feedback">
         <div *ngIf="form.get('title').errors.required">Título Obrigatório</div>
         <div *ngIf="form.get('title').errors.minlength">Título deve ter min 3 caracteres</div>
         <div *ngIf="form.get('title').errors.maxlength">Título deve ter max 15 caracteres</div>
@@ -18,8 +17,8 @@
     <!-- deadline -->
     <div class="form-group col-md-3">
       <label for="deadline" class="control-label">Prazo de entrega</label>
-      <input type="date" class="form-control" id="deadline" formControlName="deadline" [ngClass]="formUtils.fieldClassForErrorOrSuccess('deadline')">
-      <div *ngIf="formUtils.showFieldError(getField('deadline'))" class="invalid-feedback">Prazo Inválido.</div>
+      <input type="date" class="form-control" id="deadline" format="dd/MM/yyyy" formControlName="deadline" [ngClass]="formUtils.fieldClassForErrorOrSuccess('deadline')">
+      <div *ngIf="formUtils.showFieldError('deadline')" class="invalid-feedback">Prazo Inválido.</div>
     </div>
 
     <!-- status -->
@@ -30,9 +29,8 @@
         <option *ngFor="let option of taskDoneOptions" [value]="option.value">{{option.text}}</option>
       </select>
     </div>
-    
   </div>
-  
+
   <!-- description -->
   <div class="row">
     <div class="form-group col-md-12">

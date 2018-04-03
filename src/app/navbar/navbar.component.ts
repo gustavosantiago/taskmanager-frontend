@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Task } from '../tasks/shared/task.model';
+import { AuthService } from '../shared/auth.service'
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,4 +8,6 @@ import { Task } from '../tasks/shared/task.model';
   templateUrl: './navbar.component.html'
 })
 
-export class NavbarComponent {}
+export class NavbarComponent {
+  public constructor(private authService: AuthService) {}
+}

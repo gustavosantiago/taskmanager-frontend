@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { AuthService } from './../shared/auth.service';
 import { FormUtils } from './../shared/form.utils';
+import { User } from './../shared/user.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -13,19 +16,19 @@ export class SignUpFormComponent {
   public form: FormGroup;
   public formUtils: FormUtils;
 
-  public constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(100)] ],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(9)]],
-      passwordConfirmation: [null, [Validators.required, Validators.minLength(9)]]
-    }, {validator: this.passwordConfirmationValidator});
-
+  public constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
+    this.signUpParams();
     this.formUtils = new FormUtils(this.form);
   }
 
   public signUpUser() {
-    console.log(this.form.value);
+    this.authService.signUp(this.form.value as User)
+      .subscribe(
+        reponse => {
+          alert('Conta criada com sucesso');
+          this.router.navigate(['/dashboard'])
+        }
+      )
   }
 
   public passwordConfirmationValidator(form: FormGroup) {
@@ -35,5 +38,14 @@ export class SignUpFormComponent {
       form.get('passwordConfirmation').setErrors({'mismatch': true});
     }
 
+  }
+
+  private signUpParams() {
+    this.form = this.formBuilder.group({
+      name: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(100)]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(9)]],
+      passwordConfirmation: [null, [Validators.required, Validators.minLength(9)]]
+    }, { validator: this.passwordConfirmationValidator });
   }
 }

@@ -11,7 +11,10 @@ import { User } from './user.model';
 export class AuthService {
   public constructor(private tokenService: Angular2TokenService) {}
 
-  public signUp(user: User) {}
+  public signUp(user: User): Observable<Response> {
+    return this.tokenService.registerAccount(user as any)
+      .catch(this.handleErrors)
+  }
 
   public signIn(uid: string, password: string) {}
 

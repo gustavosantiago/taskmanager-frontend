@@ -1,6 +1,16 @@
 <h1 class="page-header">Cadastre-se</h1>
 
+
 <div class="jumbotron">
+  <div *ngIf="formErrors" class="alert alert-danger" role="alert">
+    <strong>
+      Ocorreu um erro ao criar uma conta no sistema.
+    </strong>
+
+    <ul>
+      <li *ngFor="let error of formErrors">{{error}}</li>
+    </ul>
+  </div>
 
   <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signUpUser()">
     <div class="row">
@@ -52,6 +62,6 @@
       </div>
     </div>
    
-    <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Cadastrar</button>
+    <button [disabled]="form.invalid || submitted" type="submit" class="btn btn-primary">Cadastrar</button>
   </form>
 </div>

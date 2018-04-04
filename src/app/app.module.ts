@@ -20,6 +20,7 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
 // services imports
 import { TaskService } from './tasks/shared/task.service';
+import { TokenService } from './shared/token.service';
 import { AuthService } from './shared/auth.service';
 
 // guards
@@ -67,7 +68,8 @@ import * as $ from 'jquery';
     AuthGuard,
     AuthService,
     NotAuthenticatedGuard,
-    TaskService
+    TaskService,
+    TokenService
   ],
   bootstrap: [AppComponent]
 })

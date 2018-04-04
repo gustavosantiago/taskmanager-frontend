@@ -34,10 +34,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     ];
 
     this.form = this.formBuilder.group({
-      title: new FormControl([null, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]]),
-      deadline: new FormControl([null, Validators.required]),
-      description: new FormControl([null, Validators.required]),
-      done: new FormControl([null, Validators.required])
+      title: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(35)]],
+      deadline: [null, Validators.required],
+      description: [null, Validators.required],
+      done: [null, Validators.required],
     });
 
     this.formUtils = new FormUtils(this.form);
@@ -49,8 +49,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
     this.route.params
       .switchMap((params: Params) => this.taskService.getById(+params['id']))
       .subscribe(
-        task => this.setTask(task),
-        error => alert('Não inciou')
+        (task) => this.setTask(task),
+        (error) => alert('Não inciou')
       );
   }
 
@@ -78,8 +78,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
     this.taskService.update(this.task)
       .subscribe(
-        () => alert("Tarefa atualizada com sucesso!"),
-        () => alert("Ocorreu um no servidor, tente mais tarde.")
-      )
+        () => alert('Tarefa atualizada com sucesso!'),
+        () => alert('Ocorreu um no servidor, tente mais tarde.')
+      );
   }
 }
